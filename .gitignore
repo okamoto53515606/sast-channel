@@ -225,3 +225,8 @@ cdk.out/
 .examples/
 # 環境変数ファイル（.example のみコミット対象）
 frontend/.env.local
+# CDK の lib/ は Python の lib/ 除外ルールの対象外にする
+# why: .gitignore の lib/ ルール（Python用）が cdk/lib/ を誤って除外するため
+!cdk/lib/
+# Next.js の src/lib/ も同様に除外対象から外す
+!frontend/src/lib/
