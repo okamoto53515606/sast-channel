@@ -216,3 +216,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+node_modules/
+.next/
+out/
+dist/
+cdk.out/
+.examples/
+# 環境変数ファイル（.example のみコミット対象）
+frontend/.env.local
