@@ -1,8 +1,9 @@
 """
 Gemini + GitHub MCP + Brave MCP の単体テスト
-Usage: cd task && python test_gemini.py
+Usage: cd task && uv run --with python-dotenv --with "strands-agents[gemini]" --with strands-agents-tools python3 test_gemini.py
 """
 import os
+import sys
 from dotenv import load_dotenv
 load_dotenv(dotenv_path="../.env")
 
@@ -75,6 +76,61 @@ def main():
     )
     result = agent_github("GitHub MCPを使って、okamoto53515606/firebase-studio-sample1 リポジトリのREADMEを取得してください。")
     print(f"結果: {str(result)[:300]}")
+    print()
+
+    # テスト4: 子育てママ Gemini 実タスク
+    print("--- テスト4: 子育てママ Gemini 実タスク ---")
+    print("リポジトリ: okamoto53515606/firebase-studio-sample1 / ブランチ: sast-channel")
+    from prompts.gemini_mother import GEMINI_MOTHER_PROMPT
+    from datetime import datetime, timezone, timedelta
+
+    JST = timezone(timedelta(hours=9))
+    date_str = datetime.now(JST).strftime("%Y%m%d")
+    author_nickname = "okamo"
+    author_intro = "個人開発者"
+    repo_url = "https://github.com/okamoto53515606/firebase-studio-sample1"
+    review_branch = "sast-channel"
+    owner = "okamoto53515606"
+    repo = "firebase-studio-sample1"
+
+    prompt = (
+        GEMINI_MOTHER_PROMPT
+        .replace("{review_branch}", review_branch)
+        .replace("{repo_url}", repo_url)
+        .replace("{owner}", owner)
+        .replace("{repo}", repo)
+        .replace("{date}", date_str)
+        .replace("NICKNAME", author_nickname)
+        + f"\n\n## タスク情報\n"
+        f"- リポジトリURL: {repo_url}\n"
+        f"- レビューブランチ: {review_branch}\n"
+        f"- 作者ニックネーム: {author_nickname}\n"
+        f"- 作者自己紹介: {author_intro}\n\n"
+        f"では、上記手順に従ってレビュー・Issue起票・PR作成を実施してください。"
+    )
+
+    github_mcp4 = MCPClient(
+        lambda: streamablehttp_client(
+            url="https://api.githubcopilot.com/mcp/",
+            headers={"Authorization": f"Bearer {pat}"},
+        )
+    )
+    brave_mcp4 = MCPClient(lambda: stdio_client(
+        StdioServerParameters(
+            command="npx",
+            args=["-y", "@brave/brave-search-mcp-server"],
+            env={"BRAVE_API_KEY": os.environ.get("BRAVE_API_KEY")},
+        )
+    ))
+
+    agent_full = Agent(
+        name="子育てママ_gemini_full",
+        model=model,
+        system_prompt="あなたは子育てママ Geminiです。指示に従ってレビュー・Issue起票・PR作成を実施してください。",
+        tools=[github_mcp4, brave_mcp4, http_request, current_time],
+    )
+    result = agent_full(prompt, limits={"turns": 20})
+    print(f"結果: {str(result)[:500]}")
     print()
 
     print("=== テスト完了 ===")
