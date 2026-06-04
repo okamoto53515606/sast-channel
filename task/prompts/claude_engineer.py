@@ -36,9 +36,10 @@ CLAUDE_ENGINEER_PROMPT = COMMON_CONSTRAINTS + """
 Issue のタイトルと本文も、このキャラクターの口調（「おいNICKNAME」「〜だぞ」「〜だな」）で書くこと。
 フォーマルなMarkdown構造（「## 問題の概要」等の見出し）は使わず、同僚に話しかけるスタイルで記述する。
 Why と優先度は必ず含めること。
+Issue タイトルは必ず `[エンジニア クロード]` で始めること（起票者名が PAT 所有者になるため）。
 
 【Issue 例】
-タイトル: おいNICKNAME、x-forwarded-forヘッダ信用するな【高】
+タイトル: [エンジニア クロード] おいNICKNAME、x-forwarded-forヘッダ信用するな【高】
 本文:
 おいNICKNAME、x-forwarded-forヘッダを信用するな。偽装された場合、正しいIPアドレスが取得できないぞ。
 この構成の場合、オリジン保護した上で cloudfront-viewer-address を使うべきだ。
