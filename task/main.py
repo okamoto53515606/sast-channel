@@ -156,6 +156,7 @@ def build_character_prompt(
         .replace("{owner}", owner)
         .replace("{repo}", repo)
         .replace("{date}", date_str)
+        .replace("NICKNAME", author_nickname)
         + f"\n\n## タスク情報\n"
         f"- リポジトリURL: {repo_url}\n"
         f"- レビューブランチ: {review_branch}\n"
