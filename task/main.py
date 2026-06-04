@@ -241,17 +241,21 @@ def run_character_review(
     author_intro: str,
     github_pat: str,
     date_str: str,
+    extra_tools: list | None = None,
 ) -> None:
     log(f"[{name}] レビュー開始...")
 
     github_mcp = create_github_mcp()
     brave_mcp = create_brave_mcp()
 
+    base_tools = [github_mcp, brave_mcp, http_request, current_time]
+    tools = base_tools + (extra_tools or [])
+
     agent = Agent(
         name=name.replace(" ", "_").lower(),
         model=model,
         system_prompt=f"あなたは{name}です。指示に従ってレビュー・Issue起票・修正ブランチ作成・PR作成を実施してください。",
-        tools=[github_mcp, brave_mcp, shell, editor, file_read, file_write, http_request, current_time],
+        tools=tools,
     )
 
     prompt = build_character_prompt(
@@ -283,12 +287,18 @@ def run_phase2(
     log("━" * 50)
 
     characters = [
-        ("エンジニア クロード", create_claude_model(), CLAUDE_ENGINEER_PROMPT),
-        ("税理士 GPT",          create_openai_model(),  GPT_TAX_ADVISOR_PROMPT),
-        ("子育てママ Gemini",   create_gemini_model(),  GEMINI_MOTHER_PROMPT),
+        # shell/editor 系を渡す（Anthropic/OpenAI は対応済み）
+        ("エンジニア クロード", create_claude_model(), CLAUDE_ENGINEER_PROMPT,
+         [shell, editor, file_read, file_write]),
+        ("税理士 GPT",          create_openai_model(),  GPT_TAX_ADVISOR_PROMPT,
+         [shell, editor, file_read, file_write]),
+        # Gemini は Function Calling のスキーマ制約により shell/editor 非対応
+        # → GitHub MCP 経由のみでレビュー（Issue 起票 + PR コメントのみ）
+        ("子育てママ Gemini",   create_gemini_model(),  GEMINI_MOTHER_PROMPT,
+         []),
     ]
 
-    for name, model, template in characters:
+    for name, model, template, extra_tools in characters:
         run_character_review(
             name=name,
             model=model,
@@ -299,6 +309,7 @@ def run_phase2(
             author_intro=author_intro,
             github_pat=github_pat,
             date_str=date_str,
+            extra_tools=extra_tools,
         )
 
 
