@@ -89,11 +89,23 @@ export class TaskStack extends cdk.Stack {
         logGroup,
         streamPrefix: 'ecs',
       }),
-      // 実行時に run-task Lambda から環境変数を上書き
+      // API キーは .env から CDK デプロイ時に埋め込む（タスク定義に直接渡す）
+      // 実行時に run-task Lambda から REPO_URL 等の実行パラメータを上書き
       environment: {
+        // ── 実行時パラメータ（Lambda から上書き） ──
         REPO_URL: '',
         REVIEW_BRANCH: '',
+        AUTHOR_NICKNAME: '',
         AUTHOR_INTRO: '',
+        // ── API キー（デプロイ時に .env から注入） ──
+        GITHUB_PAT:      process.env.GITHUB_PAT      || '',
+        CLAUDE_API_KEY:  process.env.CLAUDE_API_KEY  || '',
+        OPENAI_API_KEY:  process.env.OPENAI_API_KEY  || '',
+        GEMINI_API_KEY:  process.env.GEMINI_API_KEY  || '',
+        BRAVE_API_KEY:   process.env.BRAVE_API_KEY   || '',
+        CLAUDE_MODEL_ID: process.env.CLAUDE_MODEL_ID || 'claude-sonnet-4-6',
+        OPEN_AI_MODEL_ID: process.env.OPEN_AI_MODEL_ID || 'gpt-5.4',
+        GEMINI_MODEL_ID: process.env.GEMINI_MODEL_ID || 'gemini-3.5-flash',
       },
     });
 

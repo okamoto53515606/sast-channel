@@ -1,0 +1,5 @@
+strands-agents[anthropic,openai,gemini]
+strands-agents-tools
+python-dotenv
+boto3
+mcp
