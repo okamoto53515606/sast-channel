@@ -39,7 +39,7 @@ https://github.com/okamoto53515606/channel
 
 【2026/06/04 okamoからclaudeに相談】
 AgentCore runtime（Dockerfile）に3人がソース修正する為の環境が必要。まとめ役に依頼する前に sast-channel ブランチをローカル（本番は/app/sast-channel）にgit cloneして
-4人に共有してはどうか？その場合、処理は並行でなく直列の方がよい？どう思う？ brave search mcp や github mcp以外にも、ソース修正に必要なツールをmain.pyに準備しておく必要もある。シェルやファイル操作などの基本的なツールは Strands Agents のビルトインtoolでまかなえると考えている。レビューやパッチ時にruntime上でビルドまでしなくていいと考えている。どう思う？
+4人に共有してはどうか？キャラごとにgitのユーザー名の切り替えも必要。その場合、処理は並行でなく直列の方がよい？どう思う？ brave search mcp や github mcp以外にも、ソース修正に必要なツールをmain.pyに準備しておく必要もある。シェルやファイル操作などの基本的なツールは Strands Agents のビルトインtoolでまかなえると考えている。レビューやパッチ時にruntime上でビルドまでしなくていいと考えている。どう思う？
 
 ### Phase 2: 個別レビューとパッチ作成（担当: 3キャラクターのAI）
 3人のAIに以下を依頼し、並行して作業を実施させる。
