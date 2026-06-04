@@ -242,6 +242,7 @@ def run_character_review(
     github_pat: str,
     date_str: str,
     extra_tools: list | None = None,
+    limits: dict | None = None,
 ) -> None:
     log(f"[{name}] レビュー開始...")
 
@@ -268,7 +269,7 @@ def run_character_review(
         date_str,
     )
 
-    result = agent(prompt)
+    result = agent(prompt, limits=limits) if limits else agent(prompt)
     log(f"[{name}] 完了")
     log(str(result)[:500] + "..." if len(str(result)) > 500 else str(result))
     log("")
@@ -299,6 +300,8 @@ def run_phase2(
     ]
 
     for name, model, template, extra_tools in characters:
+        # Gemini は無限ループ防止のため turns 上限を設定
+        limits = {"turns": 20} if "Gemini" in name else None
         run_character_review(
             name=name,
             model=model,
@@ -310,6 +313,7 @@ def run_phase2(
             github_pat=github_pat,
             date_str=date_str,
             extra_tools=extra_tools,
+            limits=limits,
         )
 
 
