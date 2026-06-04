@@ -111,18 +111,8 @@ npx cdk deploy SastTaskStack --require-approval never
 
 ### 4. ログの確認
 
-```bash
-export AWS_PROFILE=<プロファイル名>
-export AWS_REGION=us-east-1
-aws logs tail /ecs/sast-channel-task --follow --format short --since 10m
-```
-
-ノイズを除くフィルタ（`RuntimeError: Event loop is closed` 等は無害なので除外推奨）:
-
-```bash
-aws logs tail /ecs/sast-channel-task --follow --format short --since 10m 2>&1 \
-  | grep -v "RuntimeError\|Event loop\|httpx\|httpcore\|anyio\|selector\|Traceback\|_transport\|_asyncio\|aclose"
-```
+タスク起動画面の「ログ」エリアにリアルタイムでログが表示されます（スクリーンショット参照）。  
+タスク実行中・完了後ともに画面から確認可能です。
 
 ---
 
@@ -209,4 +199,13 @@ sast-channel/
 | Phase 2 | エンジニア クロード → 税理士 GPT → 子育てママ Gemini（直列） | Issue 起票・修正ブランチ作成・PR 作成 |
 | Phase 3 | まとめ役クロード | PR レビュー・マージ判定・BBS 風レポート生成 |
 
-詳細は [docs/blueprint.md](docs/blueprint.md) を参照してください。
+---
+
+## 開発の経緯
+
+| 日時 | 出来事 |
+|---|---|
+| 2026/06/04 朝の通勤電車 | このシステムを思いつく。スマホでメモ → [docs/20240603_idea_memo.txt](docs/20240603_idea_memo.txt) |
+| 2026/06/04 帰宅中 | 朝のメモを Gemini に整形してもらい企画概要を作成 → [docs/blueprint.md](docs/blueprint.md) |
+| 2026/06/04 深夜 | `claude-sonnet-4-6` で Fargate タスク起動画面（フロントエンド）を開発 → [prompt_history/20260603_claude-sonnet-4-6.md](prompt_history/20260603_claude-sonnet-4-6.md) |
+| 2026/06/05 夜 | `claude-sonnet-4-6` で Fargate タスク本体を開発・動作確認成功 → [prompt_history/20260603_claude-sonnet-4-6.md](prompt_history/20260603_claude-sonnet-4-6.md) |
