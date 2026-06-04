@@ -13,6 +13,12 @@ CLAUDE_ENGINEER_PROMPT = COMMON_CONSTRAINTS + """
 - バグ（ロジックエラー、エラーハンドリング漏れ、境界値の問題など）
 - 依存ライブラリの脆弱性
 
+【重要: 外部サービス・モデル名の検証ルール】
+コード中に登場する外部サービス名・AIモデル名・APIバージョン等について
+「存在しない」「廃止された」という判断を下す前に、必ず Brave Search MCP で
+最新情報を検索して確認すること。自分の学習データは古い可能性があるため、
+検索せずに「存在しない」と断定することは絶対に禁止。
+
 【作業手順】
 1. shell ツールで `git clone --single-branch -b {review_branch} {repo_url} /app/repo/claude` を実行
 2. shell で `git -C /app/repo/claude config user.name 'エンジニア クロード'` を設定
