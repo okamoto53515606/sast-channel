@@ -208,4 +208,4 @@ sast-channel/
 | 2026/06/04 朝の通勤電車 | このシステムを思いつく。スマホでメモ → [docs/20240603_idea_memo.txt](docs/20240603_idea_memo.txt) |
 | 2026/06/04 帰宅中 | 朝のメモを Gemini に整形してもらい企画概要を作成 → [docs/blueprint.md](docs/blueprint.md) |
 | 2026/06/04 深夜 | `claude-sonnet-4-6` で Fargate タスク起動画面（フロントエンド）を開発 → [prompt_history/20260603_claude-sonnet-4-6.md](prompt_history/20260603_claude-sonnet-4-6.md) |
-| 2026/06/05 夜 | `claude-sonnet-4-6` で Fargate タスク本体を開発・動作確認成功 → [prompt_history/20260603_claude-sonnet-4-6.md](prompt_history/20260603_claude-sonnet-4-6.md) |
+| 2026/06/04 夜 | `claude-sonnet-4-6` で Fargate タスク本体を開発・動作確認成功 → [prompt_history/20260604_claude-sonnet-4-6.md](prompt_history/20260604_claude-sonnet-4-6.md) |
