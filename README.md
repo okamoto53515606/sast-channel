@@ -55,7 +55,7 @@ AWS_REGION="us-east-1"
 GEMINI_MODEL_ID="gemini-3.5-flash"
 OPEN_AI_MODEL_ID="gpt-5.4"
 CLAUDE_MODEL_ID="claude-sonnet-4-6"
-```
+COGNITO_USER_EMAIL="ログイン用のメールアドレス"```
 
 ---
 
