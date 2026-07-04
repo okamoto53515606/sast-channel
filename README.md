@@ -65,10 +65,10 @@ COGNITO_USER_EMAIL="ログイン用のメールアドレス"
 設定例:
 ```
 DEEPSEEK_API_KEY="sk-..."
-DEEPSEEK_MODEL_ID="deepseek-chat"
+DEEPSEEK_MODEL_ID="deepseek-v4-pro"
 ```
 
-コード中心の技術記事では十分なレビュー品質が得られます。
+実際の実行例として、[Firebase Studio 製分析アプリのレビューレポート](https://github.com/okamoto53515606/firebase-studio-sample1/blob/main/channel/2026-07-04_20-24/report.md) では、DeepSeek V4 Pro で動作するエンジニア（クロード）が `.gitignore` 不備・未使用依存の整理・SQL コメントバイパス（Issue #28）・ReactMarkdown XSS（Issue #29）など実践的な指摘と PR 作成を行い、十分なレビュー品質が確認されています。
 
 ---
 
