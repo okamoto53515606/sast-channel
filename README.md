@@ -58,6 +58,23 @@ CLAUDE_MODEL_ID="claude-sonnet-4-6"
 COGNITO_USER_EMAIL="ログイン用のメールアドレス"
 ```
 
+#### 💰 節約モード（DeepSeek V4 Pro）
+
+環境変数 `DEEPSEEK_API_KEY` と `DEEPSEEK_MODEL_ID` を設定すると、エンジニア（クロード）のみ DeepSeek V4 Pro に切り替わります。まとめ役クロード・税理士 GPT・子育てママ Gemini は通常モデルのままです。
+
+| モード | エンジニア | コスト目安 |
+|---|---|---|
+| 通常 | Claude (claude-sonnet-4-6) | ~$5.33/回 |
+| 節約 | DeepSeek V4 Pro | ~$0.26/回（約95%削減） |
+
+設定例:
+```
+DEEPSEEK_API_KEY="sk-..."
+DEEPSEEK_MODEL_ID="deepseek-chat"
+```
+
+コード中心の技術記事では十分なレビュー品質が得られます。
+
 ---
 
 ### 2. デプロイ手順

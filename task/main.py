@@ -17,6 +17,7 @@ from strands import Agent
 from strands.models.anthropic import AnthropicModel
 from strands.models.openai import OpenAIModel
 from strands.models.gemini import GeminiModel
+from strands.models.litellm import LiteLLMModel
 from strands.tools.mcp import MCPClient
 from mcp.client.streamable_http import streamablehttp_client
 from mcp.client.stdio import stdio_client, StdioServerParameters
@@ -75,6 +76,21 @@ def create_gemini_model() -> GeminiModel:
     return GeminiModel(
         client_args={"api_key": get_env("GEMINI_API_KEY")},
         model_id=get_env("GEMINI_MODEL_ID", "gemini-3.5-flash"),
+    )
+
+
+def is_savings_mode() -> bool:
+    """DEEPSEEK_API_KEY と DEEPSEEK_MODEL_ID が両方とも有効な値の場合、節約モードと判定する。"""
+    key = get_env("DEEPSEEK_API_KEY")
+    model = get_env("DEEPSEEK_MODEL_ID")
+    return bool(key) and bool(model)
+
+
+def create_deepseek_model() -> LiteLLMModel:
+    return LiteLLMModel(
+        model_id=get_env("DEEPSEEK_MODEL_ID"),
+        api_key=get_env("DEEPSEEK_API_KEY"),
+        params={"max_tokens": 4096},
     )
 
 
@@ -287,9 +303,15 @@ def run_phase2(
     log("【Phase 2】 個別レビューとパッチ作成（直列）")
     log("━" * 50)
 
+    _savings = is_savings_mode()
+    if _savings:
+        log("💰 節約モード: エンジニア クロード → DeepSeek V4 Pro に切り替え")
+
     characters = [
         # shell/editor 系を渡す（Anthropic/OpenAI は対応済み）
-        ("エンジニア クロード", create_claude_model(), CLAUDE_ENGINEER_PROMPT,
+        ("エンジニア クロード",
+         create_deepseek_model() if _savings else create_claude_model(),
+         CLAUDE_ENGINEER_PROMPT,
          [shell, editor, file_read, file_write]),
         ("税理士 GPT",          create_openai_model(),  GPT_TAX_ADVISOR_PROMPT,
          [shell, editor, file_read, file_write]),
@@ -381,6 +403,10 @@ def main() -> None:
     log(f"レビューブランチ: {review_branch}")
     log(f"作者ニックネーム: {nickname}")
     log(f"作者情報       : {author_intro}")
+    if is_savings_mode():
+        log("節約モード       : 💰 ON（エンジニアのみ DeepSeek V4 Pro）")
+    else:
+        log("節約モード       : OFF（全キャラ通常モデル）")
     log("")
 
     if not github_pat:

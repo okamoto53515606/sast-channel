@@ -3,3 +3,4 @@ strands-agents-tools
 python-dotenv
 boto3
 mcp
+litellm
