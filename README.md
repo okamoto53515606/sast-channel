@@ -54,7 +54,7 @@ AWS_PROFILE="..."
 AWS_REGION="us-east-1"
 GEMINI_MODEL_ID="gemini-3.5-flash"
 OPEN_AI_MODEL_ID="gpt-5.4"
-CLAUDE_MODEL_ID="claude-sonnet-4-6"
+CLAUDE_MODEL_ID="claude-sonnet-5"
 COGNITO_USER_EMAIL="ログイン用のメールアドレス"
 ```
 
@@ -64,7 +64,7 @@ COGNITO_USER_EMAIL="ログイン用のメールアドレス"
 
 | モード | エンジニア | コスト目安 |
 |---|---|---|
-| 通常 | Claude (claude-sonnet-4-6) | ~$5.33/回 |
+| 通常 | Claude (claude-sonnet-5) | ~$5.33/回 |
 | 節約 | DeepSeek V4 Pro | ~$0.26/回（約95%削減） |
 
 設定例:

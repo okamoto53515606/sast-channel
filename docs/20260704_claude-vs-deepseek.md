@@ -1,4 +1,4 @@
-# Claude Sonnet 4.6 vs DeepSeek V4 Pro 比較レポート
+# Claude Sonnet 5 vs DeepSeek V4 Pro 比較レポート
 
 **作成日**: 2026-07-04  
 **対象リポジトリ**: [firebase-studio-sample1](https://github.com/okamoto53515606/firebase-studio-sample1)  
@@ -12,7 +12,7 @@
 
 | 項目 | Claude (本番) | DeepSeek (節約) |
 |---|---|---|
-| エンジニア モデル | Claude Sonnet 4.6 | DeepSeek V4 Pro (LiteLLM経由) |
+| エンジニア モデル | Claude Sonnet 5 | DeepSeek V4 Pro (LiteLLM経由) |
 | エンジニア コスト | ~$5.00 | ~$0.26 |
 | 全体コスト（概算） | ~$5.33 | ~$0.59（他キャラ含む） |
 | **削減率** | — | **約89%削減** |
@@ -117,7 +117,7 @@
 
 ## 6. 総評
 
-| 評価軸 | Claude Sonnet 4.6 | DeepSeek V4 Pro |
+| 評価軸 | Claude Sonnet 5 | DeepSeek V4 Pro |
 |---|---|---|
 | コスト | $5.33 | **$0.26**（95%減） |
 | 脆弱性検出の深さ | ★★★★☆ | ★★★★★ |
@@ -129,7 +129,7 @@
 
 ### 結論
 
-**DeepSeek V4 Pro は、エンジニア クロード役として Claude Sonnet 4.6 と遜色ない、むしろコード解析の深さでは上回る場面もある品質を示した。** 特に LLMアプリケーション固有の脆弱性（プロンプトインジェクション、ReactMarkdown XSS）への気づきは Claude を上回った。
+**DeepSeek V4 Pro は、エンジニア クロード役として Claude Sonnet 5 と遜色ない、むしろコード解析の深さでは上回る場面もある品質を示した。** 特に LLMアプリケーション固有の脆弱性（プロンプトインジェクション、ReactMarkdown XSS）への気づきは Claude を上回った。
 
 一方で、Claude の初回セッションは「実際の実行パスにガードがない」という根本的な欠陥を確実に修正しており、修正の実効性では一日の長がある。DeepSeek セッションはフォローアップ回だったため、どうしても「前回の積み残し」が中心になり、致命的な脆弱性の修正機会が限られていた面もある。
 
