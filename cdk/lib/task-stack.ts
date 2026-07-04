@@ -79,8 +79,8 @@ export class TaskStack extends cdk.Stack {
     // ── Fargate タスク定義 ────────────────────────────────────
     const taskDef = new ecs.FargateTaskDefinition(this, 'TaskDef', {
       family: 'sast-channel-task',
-      cpu: 256,
-      memoryLimitMiB: 512,
+      cpu: 512,
+      memoryLimitMiB: 1024,
     });
 
     taskDef.addContainer(this.containerName, {
