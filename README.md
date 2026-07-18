@@ -53,7 +53,7 @@ BRAVE_API_KEY="..."
 AWS_PROFILE="..."
 AWS_REGION="us-east-1"
 GEMINI_MODEL_ID="gemini-3.5-flash"
-OPEN_AI_MODEL_ID="gpt-5.6-terra"
+OPEN_AI_MODEL_ID="gpt-5.4"
 CLAUDE_MODEL_ID="claude-sonnet-5"
 COGNITO_USER_EMAIL="ログイン用のメールアドレス"
 ```
