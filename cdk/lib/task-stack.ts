@@ -104,7 +104,7 @@ export class TaskStack extends cdk.Stack {
         GEMINI_API_KEY:  process.env.GEMINI_API_KEY  || '',
         BRAVE_API_KEY:   process.env.BRAVE_API_KEY   || '',
         CLAUDE_MODEL_ID: process.env.CLAUDE_MODEL_ID || 'claude-sonnet-5',
-        OPEN_AI_MODEL_ID: process.env.OPEN_AI_MODEL_ID || 'gpt-5.4',
+        OPEN_AI_MODEL_ID: process.env.OPEN_AI_MODEL_ID || 'gpt-5.6-terra',
         GEMINI_MODEL_ID: process.env.GEMINI_MODEL_ID || 'gemini-3.5-flash',
         // ── 節約モード（DeepSeek V4 Pro） ──
         DEEPSEEK_API_KEY:  process.env.DEEPSEEK_API_KEY  || '',
