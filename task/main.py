@@ -98,7 +98,8 @@ def create_deepseek_model() -> LiteLLMModel:
         model_id = f"deepseek/{model_id}"
     return LiteLLMModel(
         model_id=model_id,
-        params={"max_tokens": 4096},
+        # DeepSeek V4 Pro の最大出力トークン数（16,384）。長文レポートやコード生成に対応するため増量。
+        params={"max_tokens": 16384},
     )
 
 
