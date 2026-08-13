@@ -332,7 +332,7 @@ def run_phase2(
 
     for name, model, template, extra_tools in characters:
         # Gemini は無限ループ防止のため turns 上限を設定
-        limits = {"turns": 20} if "Gemini" in name else None
+        limits = {"turns": 40} if "Gemini" in name else None
         run_character_review(
             name=name,
             model=model,
