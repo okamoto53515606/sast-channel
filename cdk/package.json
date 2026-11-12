@@ -1,13 +1,16 @@
 {
   "name": "sast-channel-cdk",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
+  "engines": {
+    "node": ">=24.22.3"
+  },
   "scripts": {
     "build": "tsc",
     "cdk": "cdk"
   },
   "dependencies": {
-    "aws-cdk-lib": "^2.273.0",
+    "aws-cdk-lib": "^2.276.0",
     "constructs": "^10.0.0",
     "dotenv": "^16.0.0",
     "jsonwebtoken": "^9.0.0",
@@ -16,8 +19,8 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.0",
     "@types/jsonwebtoken": "^9.0.0",
-    "@types/node": "^22.0.0",
-    "aws-cdk": "^2.1146.0",
+    "@types/node": "^24.19.2",
+    "aws-cdk": "^2.1148.1",
     "esbuild": "^0.25.0",
     "typescript": "^5.0.0"
   }
